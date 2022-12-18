@@ -71,15 +71,18 @@ function loginDetailsAuthentication(
     (username !== loginDetails.username && loginDetails.username !== "")
   ) {
     setLoginError(true);
-  } else if (
-    password === loginDetails.password &&
-    username === loginDetails.username
-  ) {
-    setLoginError(false);
-    setRedirect(true);
-    //This allows manage the user login state among pages
-    sessionStorage.setItem("login", "true");
-    setLoginSession(true);
+  } else {
+    //redirects to counter page
+    if (
+      password === loginDetails.password &&
+      username === loginDetails.username
+    ) {
+      setLoginError(false);
+      setRedirect(true);
+      //This allows manage the user login state among pages
+      sessionStorage.setItem("login", "true");
+      setLoginSession(true);
+    }
   }
 }
 

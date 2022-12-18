@@ -44,7 +44,7 @@ const LoginForm = ({
           setLoginDetails({ ...loginDetails, password: e.target.value })
         }
       />
-      {loginError && <p>invalid login details</p>}
+      {loginError && <p className="login-error">invalid login details</p>}
       <p>check the docs folder for the username and password</p>
       <button onClick={() => setButtonClick(true)}>Login</button>
     </form>

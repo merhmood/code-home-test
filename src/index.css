@@ -29,7 +29,7 @@ form .login-input {
 form p {
   text-align: center;
 }
-form p:first-child {
+form .login-error {
   color: red;
 }
 form button {
