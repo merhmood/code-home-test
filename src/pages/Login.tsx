@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import LoginInput from "../components/LoginInput";
+import { Navigate } from "react-router-dom";
+import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   const [loginDetails, setLoginDetails] = useState({
@@ -8,11 +9,19 @@ const Login = () => {
   });
   const [loginError, setLoginError] = useState(false);
   const [buttonClick, setButtonClick] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const [loginSession, setLoginSession] = useState(false);
 
   useEffect(() => {
     //Initialize the password using local storage
     localStorage.setItem("password", "234kJ24@2j");
     localStorage.setItem("username", "johnDoe");
+    if (
+      sessionStorage.getItem("login") &&
+      sessionStorage.getItem("login") === "true"
+    ) {
+      setLoginSession(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -20,43 +29,31 @@ const Login = () => {
     // and perform needed checks
     const password = localStorage.getItem("password");
     const username = localStorage.getItem("username");
-    loginDetailsAuthentication(password, username, loginDetails, setLoginError);
+    loginDetailsAuthentication(
+      password,
+      username,
+      loginDetails,
+      setLoginError,
+      setRedirect,
+      setLoginSession,
+      sessionStorage
+    );
     // This ensures that when checks are done,
     // button is returned to its previous state
     setButtonClick(false);
   }, [buttonClick]);
-  return (
-    <div className="App">
-      <form
-        onSubmit={
-          // This prevent the default action of the form from firing.
-          // This allows enable us to get the input fields without,
-          // submitting the form
-          (e) => e.preventDefault()
-        }
-      >
-        {/* The username and password is also located in the docs folder */}
-        <LoginInput
-          inputType="text"
-          placeholder="Username"
-          inputValue={loginDetails.username}
-          onChange={(e) =>
-            setLoginDetails({ ...loginDetails, username: e.target.value })
-          }
-        />
-        <LoginInput
-          inputType="password"
-          placeholder="Password"
-          inputValue={loginDetails.password}
-          onChange={(e) =>
-            setLoginDetails({ ...loginDetails, password: e.target.value })
-          }
-        />
-        {loginError && <p>invalid login details</p>}
-        <p>check the docs folder for the username and password</p>
-        <button onClick={() => setButtonClick(true)}>Login</button>
-      </form>
-    </div>
+
+  const loginFormParameter = {
+    loginDetails,
+    setLoginDetails,
+    loginError,
+    setButtonClick,
+  };
+
+  return !redirect && !loginSession ? (
+    <LoginForm {...loginFormParameter} />
+  ) : (
+    <Navigate to="/counter" />
   );
 };
 
@@ -64,7 +61,10 @@ function loginDetailsAuthentication(
   password: string | null,
   username: string | null,
   loginDetails: { username: string; password: string },
-  setLoginError: React.Dispatch<React.SetStateAction<boolean>>
+  setLoginError: React.Dispatch<React.SetStateAction<boolean>>,
+  setRedirect: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoginSession: React.Dispatch<React.SetStateAction<boolean>>,
+  sessionStorage: Storage
 ) {
   if (
     (password !== loginDetails.password && loginDetails.password !== "") ||
@@ -76,7 +76,10 @@ function loginDetailsAuthentication(
     username === loginDetails.username
   ) {
     setLoginError(false);
-    console.log("redirected");
+    setRedirect(true);
+    //This allows manage the user login state among pages
+    sessionStorage.setItem("login", "true");
+    setLoginSession(true);
   }
 }
 
