@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render counter page with stubs 1`] = `
+<div
+  className="counter"
+>
+  <div>
+    <p>
+      <span>
+        counter
+      </span>
+       
+      0
+    </p>
+    <button
+      onClick={[Function]}
+    >
+      increment
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      decrement
+    </button>
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      className="input"
+      onChange={[Function]}
+      placeholder="Your Input"
+      type="text"
+      value=""
+    />
+    <button
+      onClick={[Function]}
+    >
+      add to counter
+    </button>
+  </form>
+  <button
+    onClick={[Function]}
+  >
+    Logout
+  </button>
+</div>
+`;

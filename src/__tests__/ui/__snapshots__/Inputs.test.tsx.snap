@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render input component with fake props 1`] = `
+<input
+  className="input"
+  onChange={[MockFunction]}
+  placeholder="username"
+  type="text"
+  value="someRandomUserName"
+/>
+`;

@@ -1,22 +1,12 @@
 import React from "react";
-import LoginInput from "../components/LoginInput";
-
-type LoginDetails = {
-  username: string;
-  password: string;
-};
-type LoginFormProps = {
-  loginDetails: LoginDetails;
-  setLoginDetails: React.Dispatch<React.SetStateAction<LoginDetails>>;
-  loginError: boolean;
-  setButtonClick: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import LoginInput from "./Input";
+import LoginFormProps from "../types/LoginFormProps";
 
 const LoginForm = ({
   loginDetails,
   setLoginDetails,
   loginError,
-  setButtonClick,
+  setButtonClick
 }: LoginFormProps) => {
   return (
     <form

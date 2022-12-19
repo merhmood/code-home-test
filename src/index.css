@@ -16,9 +16,8 @@ form {
   margin: 0 auto;
   width: 85%;
   max-width: 500px;
-  margin-top: 15em;
 }
-form .login-input {
+form .input {
   display: block;
   margin: 0 auto;
   height: 30px;
@@ -37,4 +36,21 @@ form button {
   display: block;
   margin: 0 auto;
   padding: 0.5em 3em;
+}
+.login {
+  margin-top: 15em;
+}
+.counter {
+  margin: 0 auto;
+  margin-top: 10em;
+  width: 85%;
+  max-width: 500px;
+}
+.counter button {
+  margin: 1em;
+  padding: 0.5em 1em;
+}
+
+.counter form {
+  margin: 2em 0;
 }

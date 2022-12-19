@@ -19,6 +19,11 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run coverage`
+
+Generate code coverage using instabul.\
+See the section about [code coverage](https://jestjs.io/blog/2020/01/21/jest-25#v8-code-coverage) for more information.
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\

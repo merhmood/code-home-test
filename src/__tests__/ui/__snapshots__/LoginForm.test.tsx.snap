@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render login form component with fake props 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    className="input"
+    onChange={[Function]}
+    placeholder="Username"
+    type="text"
+    value="someUsername"
+  />
+  <input
+    className="input"
+    onChange={[Function]}
+    placeholder="Password"
+    type="password"
+    value="somePassowrd"
+  />
+  <p>
+    check the docs folder for the username and password
+  </p>
+  <button
+    onClick={[Function]}
+  >
+    Login
+  </button>
+</form>
+`;

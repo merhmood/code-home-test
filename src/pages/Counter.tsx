@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
+import Input from "../components/Input";
 import { Navigate } from "react-router-dom";
+import CounterProps from "../types/CounterProps";
 
-const Counter = () => {
+const Counter = ({ addToCounter, logOut }: CounterProps) => {
   const [redirect, setRedirect] = useState(false);
-  useEffect(() => {
+  const [counterInput, setCounterInput] = useState("");
+  const [counterValue, setCounterValue] = useState(0);
+  useLayoutEffect(() => {
     // This ensures the user login session is available before,
     // allowing the user to access this page
     if (
@@ -15,8 +19,53 @@ const Counter = () => {
     }
   }, []);
   return !redirect ? (
-    <div>
-      Counter
+    <div className="counter">
+      <div>
+        <p>
+          <span>counter</span> {counterValue}
+        </p>
+        <button
+          onClick={() => {
+            try {
+              addToCounter(setCounterValue, counterInput, "increment");
+            } catch (err: any) {
+              console.error(err.message);
+            }
+          }}
+        >
+          increment
+        </button>
+        <button
+          onClick={() => {
+            try {
+              addToCounter(setCounterValue, counterInput, "decrement");
+            } catch (err: any) {
+              console.error(err.message);
+            }
+          }}
+        >
+          decrement
+        </button>
+      </div>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <Input
+          placeholder="Your Input"
+          inputType="text"
+          inputValue={counterInput}
+          onChange={(e) => setCounterInput(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            try {
+              addToCounter(setCounterValue, counterInput);
+            } catch (err: any) {
+              console.error(err.message);
+            }
+          }}
+        >
+          add to counter
+        </button>
+      </form>
       <button onClick={() => logOut(setRedirect, sessionStorage)}>
         Logout
       </button>
@@ -25,13 +74,5 @@ const Counter = () => {
     <Navigate to="/" />
   );
 };
-
-function logOut(
-  setRedirect: React.Dispatch<React.SetStateAction<boolean>>,
-  sessionStorage: Storage
-) {
-  sessionStorage.setItem("login", "false");
-  setRedirect(true);
-}
 
 export default Counter;
